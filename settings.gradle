@@ -1,0 +1,5 @@
+
+rootProject.name="micronaut-function-api-gateway-websockets"
+
+include("infra")
+include("app")

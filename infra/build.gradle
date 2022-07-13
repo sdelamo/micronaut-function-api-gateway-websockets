@@ -1,0 +1,35 @@
+plugins {
+    id("application") 
+    id("java") 
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform("io.micronaut:micronaut-bom:3.5.2")
+    implementation("io.micronaut.aws:micronaut-aws-cdk")
+    implementation("software.amazon.awscdk:aws-cdk-lib:2.31.1")
+
+    implementation 'software.amazon.awscdk:apigatewayv2-alpha:2.27.0-alpha.0'
+    implementation 'software.amazon.awscdk:apigatewayv2-integrations-alpha:2.27.0-alpha.0'
+
+    testImplementation platform("io.micronaut:micronaut-bom:3.5.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
+}
+
+application {
+    mainClass.set("example.micronaut.Main")
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "software.amazon.awscdk:aws-cdk-lib:2.31.1"
+    }
+}
